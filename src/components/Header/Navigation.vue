@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import { Sun, Moon } from 'lucide-vue-next';
-import { useDark, useToggle } from '@vueuse/core'
-
-const isDark = useDark()
-const toggleDark = useToggle(isDark)
+import ThemeToggle from '../ThemeToggle.vue'
 </script>
 
 <template>
@@ -13,9 +9,7 @@ const toggleDark = useToggle(isDark)
             <RouterLink to="/todo">Todo</RouterLink>
             <RouterLink to="/about">About</RouterLink>
         </nav>
-        <button @click="toggleDark()">
-            <component :is="isDark ? Sun : Moon" class="w-5 h-5" />
-        </button>
+        <ThemeToggle />
 
     </header>
 </template>

@@ -1,6 +1,11 @@
 @import "tailwindcss";
+
+
+/* Load DaisyUI */
+@plugin "daisyui";
+
 @plugin "daisyui" {
-  themes: light --default, dark --prefersdark, cupcake;
+  themes: light --default, dark --prefersdark, synthwave;
 }
 
 .text-upppercase {
@@ -15,14 +20,4 @@
 .list-leave-to {
   opacity: 0;
   transform: translateX(300px);
-}
-
-[color-theme="dark"] {
-  background-color: #121212;
-  color: white;
-}
-
-[color-theme="light"] {
-  background-color: white;
-  color: black;
 }
