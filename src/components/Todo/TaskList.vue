@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Task } from '../types';
+import type { Task } from '../../types';
 import Delete from './Delete.vue';
 import Completed from './Complete.vue';
-import TasksHeader from './TasksHeader.vue';
+import TasksHeader from "../../components/Todo/TasksHeader.vue";
 import TaskItem from './TaskItem.vue';
 import { computed } from 'vue';
 

@@ -7,5 +7,5 @@ const props = defineProps<{
 
 
 <template>
-    <h3>Tasks Completed {{  tasksCompleted }} / {{  tasksTotal }}</h3>
+    <h3>Tasks Completed {{  props.tasksCompleted }} / {{  props.tasksTotal }}</h3>
 </template>
