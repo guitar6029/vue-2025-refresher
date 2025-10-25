@@ -2,5 +2,7 @@
 </script>
 
 <template>
-    <h1>Home</h1>
+    <main class="max-w-[600px] flex items-center justify-center mx-auto">
+        <h1>Vue Refresher 2025</h1>
+    </main>
 </template>
