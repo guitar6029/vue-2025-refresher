@@ -12,5 +12,5 @@ const emit = defineEmits<{
 </script>
 
 <template>
-    <button @click="emit('onComplete')">{{ props.completed ? 'Uncomplete' : 'Complete' }}</button>
+    <input type="checkbox" :checked="props.completed" @click="emit('onComplete')" />
 </template>

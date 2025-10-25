@@ -35,9 +35,11 @@ const getTotalTasks = computed(() => {
         <ul>
             <TransitionGroup name="list" tag="ul">
                 <li class="task-item" v-for="task in props.tasks" :key="task.id">
-                    <TaskItem :task="task" />
-                    <div class="task-right-side">
+                    <div class="flex items-center gap-2">
                         <Completed :completed="task.completed" @on-complete="emit('onComplete', task.id)" />
+                        <TaskItem :task="task" />
+                    </div>
+                    <div class="task-right-side">
                         <Delete :id="task.id" @on-delete="emit('onDelete', task.id)" />
                     </div>
 
