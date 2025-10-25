@@ -1,6 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui";
 
 .text-upppercase {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .list-enter-active,
@@ -11,4 +13,14 @@
 .list-leave-to {
   opacity: 0;
   transform: translateX(300px);
+}
+
+[color-theme="dark"] {
+  background-color: #121212;
+  color: white;
+}
+
+[color-theme="light"] {
+  background-color: white;
+  color: black;
 }
