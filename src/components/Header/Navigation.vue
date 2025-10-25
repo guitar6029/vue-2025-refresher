@@ -6,6 +6,7 @@ import ThemeToggle from '../ThemeToggle.vue'
     <header class="flex items-center justify-end gap-2 p-2">
         <nav class="flex items-center gap-2">
             <RouterLink to="/">Home</RouterLink>
+            <RouterLink to="/mini-scheduler">Mini Scheduler</RouterLink>
             <RouterLink to="/todo">Todo</RouterLink>
             <RouterLink to="/about">About</RouterLink>
         </nav>
