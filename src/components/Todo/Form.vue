@@ -21,12 +21,12 @@ const newTask = ref("");
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit">
-        <label for="newTask">New Task</label>
-        <input name="newTask" :aria-invalid="!!error || undefined" v-model="newTask" @input="error = ''">
+    <form class="flex flex-col gap-2" @submit.prevent="onSubmit">
+        <label class="label" for="newTask">New Task</label>
+        <input class="input" name="newTask" :aria-invalid="!!error || undefined" v-model="newTask" @input="error = ''">
         <span v-if="error">Task cannot be empty.</span>
         <div class="button-container">
-            <button class="button-action" type="submit">Add</button>
+            <button class="btn" type="submit">Add</button>
         </div>
     </form>
 

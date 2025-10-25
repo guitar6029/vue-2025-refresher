@@ -6,7 +6,7 @@ const isDark = useDark()
 </script>
 
 <template>
-  <main :color-theme="isDark ? 'dark' : 'light'" class="min-h-screen">
+  <main :color-theme="isDark ? 'dark' : 'light'" class="min-h-screen flex flex-col">
     <Navigation />
     <RouterView />
   </main>
