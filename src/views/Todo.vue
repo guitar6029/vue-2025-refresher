@@ -41,9 +41,9 @@ const handleMarkCompleted = (id: string) => {
 </script>
 
 <template>
-    <main class="max-w-[600px] flex flex-col items-center justify-center">
-        <h1>{{ message }}</h1>
-        <Form @addTask="formSubmitted" />
-        <TaskList :tasks="tasks" @on-delete="handleDelete" @on-complete="handleMarkCompleted" />
+    <main class="min-h-screen flex flex-col items-center justify-center max-w-[600px] mx-auto">
+    <h1>{{ message }}</h1>
+    <Form @addTask="formSubmitted" />
+    <TaskList :tasks="tasks" @on-delete="handleDelete" @on-complete="handleMarkCompleted" />
     </main>
 </template>
