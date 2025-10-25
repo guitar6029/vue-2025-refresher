@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Todo from "../views/Todo.vue";
-import MiniScheduler from "../views/Mini.vue";
+import MiniTimer from "../views/Mini.vue";
 const routes = [
   { path: "/", name: "Home", component: Home },
   { path: "/todo", name: "Todo", component: Todo },
-  { path: "/mini-scheduler", name: "Scheduler", component: MiniScheduler },
+  { path: "/mini-timer", name: "Scheduler", component: MiniTimer },
 ];
 
 const router = createRouter({
