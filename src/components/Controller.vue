@@ -1,23 +1,11 @@
 <script lang="ts" setup>
-import { CircleX as Close, Sprout as Zen } from 'lucide-vue-next';
+import { CircleX as Close } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
-import { TimeAgo, getTimeProgress } from '../utils/TimeUtils';
 import { useMiniTimerStore } from '../stores/miniTimer/useMiniTimerStore';
-import { useNow } from '@vueuse/core'
-import RadialProgress from '../ui/RadialProgress.vue';
-import type { MiniTaskWithTimeStamp } from '../types/MiniTask';
-
-
-const now = useNow({ interval: 1000 });
-
-const progressForTask = (task: MiniTaskWithTimeStamp) => computed(() => {
-    now.value
-    return getTimeProgress(task.createdAt, task.dueAt);
-})
-
+import MultiTaskList from './MiniTask/MiniTaskList.vue';
+import ZenMode from './ZenMode.vue';
 
 const miniTasksStore = useMiniTimerStore();
-
 const tasks = computed(() => miniTasksStore.getMiniTasks);
 const isModalOpen = ref(false);
 const zenMode = ref(false);
@@ -45,30 +33,8 @@ const toggleModal = () => {
                             <h1>Tasks</h1>
                             <Close class="w-6 h-6 cursor-pointer" @click="toggleModal()" />
                         </div>
-
-                        <div class="flex w-fit">
-                            <div @click="zenMode = !zenMode" class="tooltip cursor-pointer"
-                                data-tip="Zen Mode, forget the time">
-                                <button class="btn">Zen Mode</button>
-                            </div>
-                        </div>
-
-                        <div class="overflow-y-auto max-h-[80%]">
-                            <ul class="list bg-base-100 rounded-box shadow-md">
-                                <li v-for="task in tasks" :key="task.id"
-                                    class="list-row flex items-center justify-between">
-                                    <div class="flex items-center gap-2">
-                                        <span class="capitalize">{{ task.taskName }}</span>
-                                        <div class="badge badge-sm badge-primary">
-                                            <span>{{ TimeAgo(task.createdAt) }}</span>
-                                        </div>
-
-                                    </div>
-                                    <Zen v-if="zenMode" class="w-6 h-6" />
-                                    <RadialProgress v-else :value="progressForTask(task).value" />
-                                </li>
-                            </ul>
-                        </div>
+                        <ZenMode :zenMode="zenMode" @update:zenMode="zenMode = $event" />
+                        <MultiTaskList :tasks="tasks" :zenMode="zenMode" />
                     </div>
                 </div>
             </Transition>
