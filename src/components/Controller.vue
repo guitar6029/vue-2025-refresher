@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import { CircleX as Close, Sprout as Zen } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
-import { useMiniTimerStore } from '../stores/miniTimer/useMiniTimerStore';
-import { CircleX as Close } from 'lucide-vue-next';
 import { TimeAgo, getTimeProgress } from '../utils/TimeUtils';
-import RadialProgress from '../ui/RadialProgress.vue';
+import { useMiniTimerStore } from '../stores/miniTimer/useMiniTimerStore';
 import { useNow } from '@vueuse/core'
+import RadialProgress from '../ui/RadialProgress.vue';
 import type { MiniTaskWithTimeStamp } from '../types/MiniTask';
+
 
 const now = useNow({ interval: 1000 });
 
@@ -19,6 +20,7 @@ const miniTasksStore = useMiniTimerStore();
 
 const tasks = computed(() => miniTasksStore.getMiniTasks);
 const isModalOpen = ref(false);
+const zenMode = ref(false);
 
 const handleModal = () => {
     isModalOpen.value = !isModalOpen.value;
@@ -44,12 +46,25 @@ const toggleModal = () => {
                             <Close class="w-6 h-6 cursor-pointer" @click="toggleModal()" />
                         </div>
 
+                        <div class="flex w-fit">
+                            <div @click="zenMode = !zenMode" class="tooltip cursor-pointer" data-tip="Zen Mode, forget the time">
+                                <button class="btn">Zen Mode</button>
+                            </div>
+                        </div>
+
                         <div class="overflow-y-auto">
                             <div class="flex flex-col gap-2">
-                                <div v-for="task in tasks" :key="task.id" class="flex items-center gap-2 ">
-                                    <span>{{ task.taskName }}</span>
-                                    <span>{{ TimeAgo(task.createdAt) }}</span>
-                                    <RadialProgress :value="progressForTask(task).value" />
+                                <div v-for="task in tasks" :key="task.id"
+                                    class="flex items-center justify-between mt-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="capitalize">{{ task.taskName }}</span>
+                                        <div class="badge badge-sm badge-primary">
+                                            <span>{{ TimeAgo(task.createdAt) }}</span>
+                                        </div>
+
+                                    </div>
+                                    <Zen v-if="zenMode" class="w-6 h-6" />
+                                    <RadialProgress v-else :value="progressForTask(task).value" />
                                 </div>
                             </div>
                         </div>
