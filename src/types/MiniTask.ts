@@ -3,3 +3,8 @@ export type MiniTask = {
     taskTime: number,
     
 }
+
+export type MiniTaskWithTimeStamp = MiniTask & {
+    timestamp: number
+    dueAt: number
+}
