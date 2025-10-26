@@ -1,16 +1,26 @@
-import { defineStore } from 'pinia'
-import type { MiniTask } from '../../types/MiniTask'
+import { defineStore } from "pinia";
+import type { MiniTask, MiniTaskWithTimeStamp } from "../../types/MiniTask";
 
-export const useMiniTimerStore = defineStore('miniTimer', {
+export const useMiniTimerStore = defineStore("miniTimer", {
   state: () => ({
-    miniTasks: [] as MiniTask[]
+    miniTasks: [] as MiniTaskWithTimeStamp[],
   }),
   getters: {
-    getMiniTasks: (state) => state.miniTasks
+    getMiniTasks: (state) => state.miniTasks,
   },
   actions: {
     addToMiniTasks(task: MiniTask) {
-        this.miniTasks.push(task)
-    }
-  }
-})
+      // first create timestamp
+      const id = crypto.randomUUID?.() ?? String(Date.now())
+      const createdAt = Date.now();
+      const dueAt = createdAt + task.taskTime * 60_000; // convert minutes → ms
+      const taskWithTimeStamp: MiniTaskWithTimeStamp = {
+        ...task,
+        id,
+        timestamp: createdAt,
+        dueAt,
+      };
+      this.miniTasks.push(taskWithTimeStamp);
+    },
+  },
+});

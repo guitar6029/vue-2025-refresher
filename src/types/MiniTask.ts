@@ -5,6 +5,7 @@ export type MiniTask = {
 }
 
 export type MiniTaskWithTimeStamp = MiniTask & {
+    id: string,
     timestamp: number
     dueAt: number
 }
