@@ -47,15 +47,16 @@ const toggleModal = () => {
                         </div>
 
                         <div class="flex w-fit">
-                            <div @click="zenMode = !zenMode" class="tooltip cursor-pointer" data-tip="Zen Mode, forget the time">
+                            <div @click="zenMode = !zenMode" class="tooltip cursor-pointer"
+                                data-tip="Zen Mode, forget the time">
                                 <button class="btn">Zen Mode</button>
                             </div>
                         </div>
 
-                        <div class="overflow-y-auto">
-                            <div class="flex flex-col gap-2">
-                                <div v-for="task in tasks" :key="task.id"
-                                    class="flex items-center justify-between mt-4">
+                        <div class="overflow-y-auto max-h-[80%]">
+                            <ul class="list bg-base-100 rounded-box shadow-md">
+                                <li v-for="task in tasks" :key="task.id"
+                                    class="list-row flex items-center justify-between">
                                     <div class="flex items-center gap-2">
                                         <span class="capitalize">{{ task.taskName }}</span>
                                         <div class="badge badge-sm badge-primary">
@@ -65,8 +66,8 @@ const toggleModal = () => {
                                     </div>
                                     <Zen v-if="zenMode" class="w-6 h-6" />
                                     <RadialProgress v-else :value="progressForTask(task).value" />
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
