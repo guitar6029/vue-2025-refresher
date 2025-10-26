@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { reactive, computed } from 'vue';
 import { useMiniTimerStore } from '../stores/miniTimer/useMiniTimerStore';
+import { toast } from 'vue3-toastify'
 
 const task = reactive({
     taskName: "",
@@ -16,8 +17,6 @@ const canSubmit = computed(() => {
     const timeChosen =
         (typeof task.customTime === 'number' && task.customTime > 0) ||
         (typeof task.taskTime === 'number' && task.taskTime > 0)
-
-
     return taskName && timeChosen
 })
 
@@ -31,6 +30,13 @@ const handleAddSchedule = () => {
 
     //call the store to push to mini timer store
     miniTimerStore.addToMiniTasks({ taskName: task.taskName, taskTime: time })
+
+
+    //add toast
+    toast.success(`Added ${task.taskName} to mini timer`, {
+        //toastClassName: "alert flex items-center gap-2 min-w-[300px]",
+        autoClose: 2000,
+    });
 
     //clear the task
     task.taskName = "";
