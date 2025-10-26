@@ -2,8 +2,17 @@
 import { computed, ref } from 'vue';
 import { useMiniTimerStore } from '../stores/miniTimer/useMiniTimerStore';
 import { CircleX as Close } from 'lucide-vue-next';
-import { timeAgo } from '../utils/TimeUtils';
+import { TimeAgo, getTimeProgress } from '../utils/TimeUtils';
 import RadialProgress from '../ui/RadialProgress.vue';
+import { useNow } from '@vueuse/core'
+import type { MiniTaskWithTimeStamp } from '../types/MiniTask';
+
+const now = useNow({ interval: 1000 });
+
+const progressForTask = (task: MiniTaskWithTimeStamp) => computed(() => {
+    now.value
+    return getTimeProgress(task.createdAt, task.dueAt);
+})
 
 
 const miniTasksStore = useMiniTimerStore();
@@ -39,8 +48,8 @@ const toggleModal = () => {
                             <div class="flex flex-col gap-2">
                                 <div v-for="task in tasks" :key="task.id" class="flex items-center gap-2 ">
                                     <span>{{ task.taskName }}</span>
-                                    <span>{{ timeAgo(task.timestamp) }}</span>
-                                    <!-- <RadialProgress :value="task.progress" /> -->
+                                    <span>{{ TimeAgo(task.createdAt) }}</span>
+                                    <RadialProgress :value="progressForTask(task).value" />
                                 </div>
                             </div>
                         </div>

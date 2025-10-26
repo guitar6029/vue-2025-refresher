@@ -17,7 +17,7 @@ export const useMiniTimerStore = defineStore("miniTimer", {
       const taskWithTimeStamp: MiniTaskWithTimeStamp = {
         ...task,
         id,
-        timestamp: createdAt,
+        createdAt,
         dueAt,
       };
       this.miniTasks.push(taskWithTimeStamp);
